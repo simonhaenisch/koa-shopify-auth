@@ -1,0 +1,52 @@
+{
+  "name": "@simonhaenisch/koa-shopify-auth",
+  "version": "3.1.61",
+  "author": "Simon Haenisch",
+  "repository": "simonhaenisch/koa-shopify-auth",
+  "license": "MIT",
+  "description": "",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc --p tsconfig.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@shopify/network": "^1.4.7",
+    "koa-compose": "^3.2.1",
+    "nonce": "^1.0.4",
+    "safe-compare": "^1.1.2",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@shopify/jest-dom-mocks": "^2.9.0",
+    "@shopify/jest-koa-mocks": "^2.2.2",
+    "@types/koa": "^2.0.0",
+    "@types/koa-compose": "*",
+    "@types/safe-compare": "^1.1.0",
+    "koa": "^2.5.0",
+    "prettier": "^2.0.5",
+    "prettier-plugin-organize-imports": "^1.0.3",
+    "typescript": "^3.8.3"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "overrides": [
+      {
+        "files": [
+          "package.json"
+        ],
+        "options": {
+          "useTabs": false
+        }
+      }
+    ]
+  }
+}
