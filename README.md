@@ -6,8 +6,8 @@ Same as `@shopify/koa-shopify-auth` but with some fixes so that it kind of works
 
 **Fixes:**
 
-* `prefix` works for all routes (08f2c56241bc50d2b7e807359e29138d1488c3da)
-* `verifyToken` properly redirects to auth if the token has expired (43b51a6f1497b06aa5859e858e3574db3d0ccb90)
+* `prefix` works for all routes ([08f2c56](https://github.com/simonhaenisch/koa-shopify-auth/commit/08f2c56241bc50d2b7e807359e29138d1488c3da))
+* `verifyToken` properly redirects to auth if the token has expired ([43b51a6](https://github.com/simonhaenisch/koa-shopify-auth/commit/43b51a6f1497b06aa5859e858e3574db3d0ccb90))
 
 ## Installation
 
