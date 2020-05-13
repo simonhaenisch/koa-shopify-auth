@@ -1,18 +1,18 @@
-# `@shopify/koa-shopify-auth`
-
-[![Build Status](https://travis-ci.org/Shopify/quilt.svg?branch=master)](https://travis-ci.org/Shopify/quilt)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md) [![npm version](https://badge.fury.io/js/%40shopify%2Fkoa-shopify-auth.svg)](https://badge.fury.io/js/%40shopify%2Fkoa-shopify-auth)
+# `@simonhaenisch/koa-shopify-auth`
 
 Middleware to authenticate a [Koa](http://koajs.com/) application with [Shopify](https://www.shopify.ca/).
 
-Sister module to [`@shopify/shopify-express`](https://www.npmjs.com/package/@shopify/shopify-express), but simplified.
+Same as `@shopify/koa-shopify-auth` but with some fixes so that it kind of works. Sadly it seems the Shopify team doesn't care much about community contributions, often not even leaving a comment (see [#791](https://github.com/Shopify/quilt/issues/791), [#1099](https://github.com/Shopify/quilt/1099), [#1148](https://github.com/Shopify/quilt/1148), [#1359](https://github.com/Shopify/quilt/1359) or [#1407](https://github.com/Shopify/quilt/1407)).
 
-Features you might know from the express module like the webhook middleware and proxy will be presented as their [own packages instead](https://github.com/Shopify/quilt/blob/master/packages/koa-shopify-graphql-proxy/README.md).
+**Fixes:**
+
+* `prefix` works for all routes (10a3a12)
+* `verifyToken` properly redirects to auth if the token has expired (43b51a6)
 
 ## Installation
 
 ```bash
-$ yarn add @shopify/koa-shopify-auth
+$ npm install @simonhaenisch/koa-shopify-auth
 ```
 
 ## Usage
