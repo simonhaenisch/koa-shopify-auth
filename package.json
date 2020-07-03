@@ -16,19 +16,19 @@
   ],
   "dependencies": {
     "@shopify/network": "^1.4.7",
-    "koa-compose": "^3.2.1",
+    "koa-compose": "^4.1.0",
     "nonce": "^1.0.4",
     "safe-compare": "^1.1.2",
-    "tslib": "^1.9.3"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@types/koa": "^2.0.0",
-    "@types/koa-compose": "*",
-    "@types/safe-compare": "^1.1.0",
-    "koa": "^2.5.0",
-    "prettier": "^2.0.5",
-    "prettier-plugin-organize-imports": "^1.0.3",
-    "typescript": "^3.8.3"
+    "@types/koa": "2.11.3",
+    "@types/koa-compose": "3.2.5",
+    "@types/safe-compare": "1.1.0",
+    "koa": "2.13.0",
+    "prettier": "2.0.5",
+    "prettier-plugin-organize-imports": "1.1.0",
+    "typescript": "3.9.6"
   },
   "prettier": {
     "printWidth": 120,
