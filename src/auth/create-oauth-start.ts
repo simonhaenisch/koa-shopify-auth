@@ -9,11 +9,11 @@ export default function createOAuthStart(options: OAuthStartOptions, callbackPat
 	return function oAuthStart(ctx: Context) {
 		const { myShopifyDomain } = options;
 		const { query } = ctx;
-		const { shop } = query;
+		const { shop: unsafeShop } = query;
 
 		const shopRegex = new RegExp(`^[a-z0-9][a-z0-9\\-]*[a-z0-9]\\.${myShopifyDomain}$`, 'i');
 
-		if (shop == null || !shopRegex.test(shop)) {
+		if (unsafeShop == null || !shopRegex.test(unsafeShop)) {
 			ctx.throw(400, Error.ShopParamMissing);
 			return;
 		}
@@ -22,6 +22,6 @@ export default function createOAuthStart(options: OAuthStartOptions, callbackPat
 
 		const formattedQueryString = oAuthQueryString(ctx, options, callbackPath);
 
-		ctx.redirect(`https://${shop}/admin/oauth/authorize?${formattedQueryString}`);
+		ctx.redirect(`https://${encodeURIComponent(unsafeShop)}/admin/oauth/authorize?${formattedQueryString}`);
 	};
 }

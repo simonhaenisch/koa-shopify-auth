@@ -14,12 +14,14 @@ const ACTION = 'Enable cookies';
 export default function createEnableCookies({ apiKey, prefix }: OAuthStartOptions) {
 	return function enableCookies(ctx: Context) {
 		const { query } = ctx;
-		const { shop } = query;
+		const { shop: unsafeShop } = query;
 
-		if (shop == null) {
+		if (unsafeShop == null) {
 			ctx.throw(400, Error.ShopParamMissing);
 			return;
 		}
+
+		const shop = encodeURIComponent(unsafeShop);
 
 		ctx.body = `
 <!DOCTYPE html>

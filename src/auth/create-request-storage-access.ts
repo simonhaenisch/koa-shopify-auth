@@ -14,12 +14,14 @@ const ACTION = 'Continue';
 export default function createRequestStorageAccess({ apiKey, prefix }: OAuthStartOptions) {
 	return function requestStorage(ctx: Context) {
 		const { query } = ctx;
-		const { shop } = query;
+		const { shop: unsafeShop } = query;
 
-		if (shop == null) {
+		if (unsafeShop == null) {
 			ctx.throw(400, Error.ShopParamMissing);
 			return;
 		}
+
+		const shop = encodeURIComponent(unsafeShop);
 
 		ctx.body = `
 <!DOCTYPE html>
