@@ -1,5 +1,6 @@
 import { Context } from 'koa';
 import { AccessMode, NextFunction, OAuthStartOptions } from '../types';
+import { joinPathSegments } from '../utils';
 import createEnableCookies from './create-enable-cookies';
 import createOAuthCallback from './create-oauth-callback';
 import createOAuthStart from './create-oauth-start';
@@ -29,23 +30,22 @@ export default function createShopifyAuth(options: OAuthStartOptions) {
 	const config = {
 		scopes: [],
 		prefix: '',
+		appTargetUrl: '',
 		myShopifyDomain: DEFAULT_MYSHOPIFY_DOMAIN,
 		accessMode: DEFAULT_ACCESS_MODE,
 		...options,
 	};
 
-	const { prefix } = config;
-
-	const oAuthStartPath = `${prefix}/auth`;
-	const oAuthCallbackPath = `${oAuthStartPath}/callback`;
+	const oAuthStartPath = joinPathSegments(config.prefix, 'auth');
+	const oAuthCallbackPath = joinPathSegments(oAuthStartPath, 'callback');
 
 	const oAuthStart = createOAuthStart(config, oAuthCallbackPath);
 	const oAuthCallback = createOAuthCallback(config);
 
-	const inlineOAuthPath = `${prefix}/auth/inline`;
+	const inlineOAuthPath = joinPathSegments(config.prefix, 'auth', 'inline');
 	const topLevelOAuthRedirect = createTopLevelOAuthRedirect(config.apiKey, inlineOAuthPath);
 
-	const enableCookiesPath = `${oAuthStartPath}/enable_cookies`;
+	const enableCookiesPath = joinPathSegments(oAuthStartPath, 'enable_cookies');
 	const enableCookies = createEnableCookies(config);
 	const requestStorageAccess = createRequestStorageAccess(config);
 
@@ -53,17 +53,17 @@ export default function createShopifyAuth(options: OAuthStartOptions) {
 		ctx.cookies.secure = true;
 
 		if (ctx.path === oAuthStartPath && !hasCookieAccess(ctx) && !grantedStorageAccess(ctx)) {
-			await requestStorageAccess(ctx);
+			requestStorageAccess(ctx);
 			return;
 		}
 
 		if (ctx.path === inlineOAuthPath || (ctx.path === oAuthStartPath && shouldPerformInlineOAuth(ctx))) {
-			await oAuthStart(ctx);
+			oAuthStart(ctx);
 			return;
 		}
 
 		if (ctx.path === oAuthStartPath) {
-			await topLevelOAuthRedirect(ctx);
+			topLevelOAuthRedirect(ctx);
 			return;
 		}
 
@@ -73,7 +73,7 @@ export default function createShopifyAuth(options: OAuthStartOptions) {
 		}
 
 		if (ctx.path === enableCookiesPath) {
-			await enableCookies(ctx);
+			enableCookies(ctx);
 			return;
 		}
 

@@ -11,7 +11,7 @@ const BODY =
 	'Your browser is blocking this app from accessing your data. To continue using this app, click Continue, then click Allow if the browser prompts you.';
 const ACTION = 'Continue';
 
-export default function createRequestStorageAccess({ apiKey, prefix }: OAuthStartOptions) {
+export default function createRequestStorageAccess(config: OAuthStartOptions) {
 	return function requestStorage(ctx: Context) {
 		const { query } = ctx;
 		const { shop: unsafeShop } = query;
@@ -35,11 +35,11 @@ export default function createRequestStorageAccess({ apiKey, prefix }: OAuthStar
   <title>Redirecting…</title>
 
   <script>
-    window.apiKey = "${apiKey}";
+    window.apiKey = "${config.apiKey}";
     window.shopOrigin = "https://${shop}";
     ${itpHelper}
     ${storageAccessHelper}
-    ${requestStorageAccess(shop, prefix)}
+    ${requestStorageAccess(shop, config)}
   </script>
 </head>
 <body>

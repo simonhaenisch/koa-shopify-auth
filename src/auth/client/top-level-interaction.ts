@@ -1,9 +1,12 @@
+import { OAuthStartOptions } from '../../types';
+import { joinPathSegments } from '../../utils';
+
 // Copied from https://github.com/Shopify/shopify_app
-const topLevelInteraction = (shop: string, prefix = '') => {
+const topLevelInteraction = (shop: string, { prefix = '' }: OAuthStartOptions) => {
 	return `(function() {
       function setUpTopLevelInteraction() {
         var TopLevelInteraction = new ITPHelper({
-          redirectUrl: "${prefix}/auth?shop=${shop}",
+          redirectUrl: "${joinPathSegments(prefix, `auth?shop=${shop}`)}",
         });
 
         TopLevelInteraction.execute();

@@ -12,6 +12,7 @@ export interface AuthConfig {
 
 export interface OAuthStartOptions extends AuthConfig {
 	prefix?: string;
+	appTargetUrl?: string;
 	scopes?: string[];
 }
 

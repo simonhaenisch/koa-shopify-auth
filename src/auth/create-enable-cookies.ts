@@ -11,7 +11,7 @@ const FOOTER = `Cookies let the app authenticate you by temporarily storing your
 information. They expire after 30 days.`;
 const ACTION = 'Enable cookies';
 
-export default function createEnableCookies({ apiKey, prefix }: OAuthStartOptions) {
+export default function createEnableCookies(config: OAuthStartOptions) {
 	return function enableCookies(ctx: Context) {
 		const { query } = ctx;
 		const { shop: unsafeShop } = query;
@@ -35,11 +35,11 @@ export default function createEnableCookies({ apiKey, prefix }: OAuthStartOption
   <title>Redirecting…</title>
 
   <script>
-    window.apiKey = "${apiKey}";
+    window.apiKey = "${config.apiKey}";
     window.shopOrigin = "https://${shop}";
 
     ${itpHelper}
-    ${topLevelInteraction(shop, prefix)}
+    ${topLevelInteraction(shop, config)}
   </script>
 </head>
 <body>

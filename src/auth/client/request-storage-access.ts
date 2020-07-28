@@ -1,12 +1,15 @@
+import { OAuthStartOptions } from '../../types';
+import { joinPathSegments } from '../../utils';
+
 // Copied from https://github.com/Shopify/shopify_app
-const requestStorageAccess = (shop: string, prefix = '') => {
+const requestStorageAccess = (shop: string, { prefix = '', appTargetUrl = '' }: OAuthStartOptions) => {
 	return `(function() {
       function redirect() {
         var targetInfo = {
           myshopifyUrl: "https://${shop}",
-          hasStorageAccessUrl: "${prefix}/auth/inline?shop=${shop}",
-          doesNotHaveStorageAccessUrl: "${prefix}/auth/enable_cookies?shop=${shop}",
-          appTargetUrl: "/?shop=${shop}"
+          hasStorageAccessUrl: "${joinPathSegments(prefix, 'auth', `inline?shop=${shop}`)}",
+          doesNotHaveStorageAccessUrl: "${joinPathSegments(prefix, 'auth', `enable_cookies?shop=${shop}`)}",
+          appTargetUrl: "${joinPathSegments(appTargetUrl, `?shop=${shop}`)}"
         }
 
         if (window.top == window.self) {
