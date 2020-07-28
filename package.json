@@ -11,7 +11,7 @@
     "build": "tsc",
     "start": "tsc --watch",
     "test": "ava",
-    "prepublish": "npm run build && npm run test"
+    "prepublish": "rm -rf dist && npm run build && npm run test"
   },
   "files": [
     "dist"
