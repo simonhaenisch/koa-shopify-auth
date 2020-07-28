@@ -2,13 +2,17 @@
 
 Middleware to authenticate a [Koa](http://koajs.com/) application with [Shopify](https://www.shopify.ca/).
 
-Same as `@shopify/koa-shopify-auth` but with some fixes so that it kind of works. Sadly it seems the Shopify team doesn't care much about community contributions, often not even leaving a comment (see [#791](https://github.com/Shopify/quilt/issues/791), [#1099](https://github.com/Shopify/quilt/1099), [#1148](https://github.com/Shopify/quilt/1148), [#1359](https://github.com/Shopify/quilt/1359) or [#1407](https://github.com/Shopify/quilt/1407)).
+Same as `@shopify/koa-shopify-auth` but with some fixes and improvements so that it kind of works. Sadly it seems the Shopify team doesn't care much about community contributions, often not even leaving a comment (see [#791](https://github.com/Shopify/quilt/issues/791), [#1099](https://github.com/Shopify/quilt/1099), [#1148](https://github.com/Shopify/quilt/1148), [#1359](https://github.com/Shopify/quilt/1359) or [#1407](https://github.com/Shopify/quilt/1407)). They also don't seem to follow semver so well (see [#1498 (comment)](https://github.com/Shopify/quilt/pull/1498#issuecomment-664974203)).
 
 **Fixes:**
 
 * `prefix` works for all routes ([08f2c56](https://github.com/simonhaenisch/koa-shopify-auth/commit/08f2c56241bc50d2b7e807359e29138d1488c3da))
 * `verifyToken` properly redirects to auth if the token has expired ([43b51a6](https://github.com/simonhaenisch/koa-shopify-auth/commit/43b51a6f1497b06aa5859e858e3574db3d0ccb90))
 * prevent xss attacks through `shop` query param everywhere ([bb860f0](https://github.com/simonhaenisch/koa-shopify-auth/commit/bb860f0553fdd8db848683def31cfbe3018a6395))
+
+**Features:**
+
+* new `appTargetUrl` option and join paths more safely ([43aee2f](https://github.com/simonhaenisch/koa-shopify-auth/commit/43aee2f83bcdd8da68359d30415569a62567a36d))
 
 ## Installation
 
