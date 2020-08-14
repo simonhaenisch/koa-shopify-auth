@@ -71,8 +71,7 @@ const storageAccessHelper = `(function() {
           if (!document.cookie) {
             throw new Error('Cannot set third-party cookie.');
           }
-          // this.redirectToAppTLD(ACCESS_GRANTED_STATUS);
-          this.redirectToAppTargetUrl();
+          this.redirectToAppTLD(ACCESS_GRANTED_STATUS);
         } catch (error) {
           console.warn('Third party cookies may be blocked.', error);
           this.redirectToAppTLD(ACCESS_DENIED_STATUS);
