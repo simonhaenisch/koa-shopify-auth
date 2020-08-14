@@ -53,28 +53,23 @@ export default function createShopifyAuth(options: OAuthStartOptions): Middlewar
 		ctx.cookies.secure = true;
 
 		if (ctx.path === oAuthStartPath && !hasCookieAccess(ctx) && !grantedStorageAccess(ctx)) {
-			requestStorageAccess(ctx, next);
-			return;
+			return requestStorageAccess(ctx, next);
 		}
 
 		if (ctx.path === inlineOAuthPath || (ctx.path === oAuthStartPath && shouldPerformInlineOAuth(ctx))) {
-			oAuthStart(ctx, next);
-			return;
+			return oAuthStart(ctx, next);
 		}
 
 		if (ctx.path === oAuthStartPath) {
-			topLevelOAuthRedirect(ctx, next);
-			return;
+			return topLevelOAuthRedirect(ctx, next);
 		}
 
 		if (ctx.path === oAuthCallbackPath) {
-			await oAuthCallback(ctx, next);
-			return;
+			return oAuthCallback(ctx, next);
 		}
 
 		if (ctx.path === enableCookiesPath) {
-			enableCookies(ctx, next);
-			return;
+			return enableCookies(ctx, next);
 		}
 
 		await next();
