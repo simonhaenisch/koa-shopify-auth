@@ -30,6 +30,9 @@ export default function createEnableCookies(config: OAuthStartOptions): Middlewa
   <meta charset="utf-8" />
   <style>
     ${css}
+    #TopLevelInteractionContent {
+      display: none;
+    }
   </style>
   <base target="_top">
   <title>Redirecting…</title>
