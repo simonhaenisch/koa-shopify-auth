@@ -67,7 +67,7 @@ const storageAccessHelper = `(function() {
           sessionStorage.setItem('shopify.granted_storage_access', true);
           this.setCookie('shopify.granted_storage_access=true');
           if (!document.cookie) {
-            throw 'Cannot set third-party cookie.'
+            throw new Error('Cannot set third-party cookie.');
           }
           this.redirectToAppTargetUrl();
         } catch (error) {

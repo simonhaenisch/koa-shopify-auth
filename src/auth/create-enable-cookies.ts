@@ -16,7 +16,7 @@ export default function createEnableCookies(config: OAuthStartOptions) {
 		const { query } = ctx;
 		const { shop: unsafeShop } = query;
 
-		if (unsafeShop == null) {
+		if (!unsafeShop) {
 			ctx.throw(400, Error.ShopParamMissing);
 			return;
 		}

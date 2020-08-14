@@ -10,11 +10,11 @@ export default function createOAuthCallback(config: AuthConfig) {
 		const { code, hmac, shop, state: nonce } = query;
 		const { apiKey, secret, afterAuth } = config;
 
-		if (nonce == null || cookies.get('shopifyNonce') !== nonce) {
+		if (!nonce || cookies.get('shopifyNonce') !== nonce) {
 			ctx.throw(403, Error.NonceMatchFailed);
 		}
 
-		if (shop == null) {
+		if (!shop) {
 			ctx.throw(400, Error.ShopParamMissing);
 			return;
 		}

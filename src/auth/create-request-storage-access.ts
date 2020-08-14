@@ -13,10 +13,9 @@ const ACTION = 'Continue';
 
 export default function createRequestStorageAccess(config: OAuthStartOptions) {
 	return function requestStorage(ctx: Context) {
-		const { query } = ctx;
-		const { shop: unsafeShop } = query;
+		const { shop: unsafeShop } = ctx.query;
 
-		if (unsafeShop == null) {
+		if (!unsafeShop) {
 			ctx.throw(400, Error.ShopParamMissing);
 			return;
 		}

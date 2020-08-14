@@ -12,7 +12,7 @@ const requestStorageAccess = (shop: string, { prefix = '', appTargetUrl = '' }: 
           appTargetUrl: "${joinPathSegments(appTargetUrl, `?shop=${shop}`)}"
         }
 
-        if (window.top == window.self) {
+        if (window.top === window.self) {
           // If the current window is the 'parent', change the URL by setting location.href
           window.top.location.href = targetInfo.hasStorageAccessUrl;
         } else {

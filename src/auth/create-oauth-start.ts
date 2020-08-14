@@ -13,7 +13,7 @@ export default function createOAuthStart(options: OAuthStartOptions, callbackPat
 
 		const shopRegex = new RegExp(`^[a-z0-9][a-z0-9\\-]*[a-z0-9]\\.${myShopifyDomain}$`, 'i');
 
-		if (unsafeShop == null || !shopRegex.test(unsafeShop)) {
+		if (!unsafeShop || !shopRegex.test(unsafeShop)) {
 			ctx.throw(400, Error.ShopParamMissing);
 			return;
 		}
