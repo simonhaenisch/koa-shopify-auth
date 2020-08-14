@@ -1,4 +1,4 @@
-import { Context } from 'koa';
+import { Middleware } from 'koa';
 import { OAuthStartOptions } from '../types';
 import itpHelper from './client/itp-helper';
 import css from './client/polaris-css';
@@ -11,8 +11,8 @@ const BODY =
 	'Your browser is blocking this app from accessing your data. To continue using this app, click Continue, then click Allow if the browser prompts you.';
 const ACTION = 'Continue';
 
-export default function createRequestStorageAccess(config: OAuthStartOptions) {
-	return function requestStorage(ctx: Context) {
+export default function createRequestStorageAccess(config: OAuthStartOptions): Middleware {
+	return function requestStorage(ctx) {
 		const { shop: unsafeShop } = ctx.query;
 
 		if (!unsafeShop) {

@@ -1,13 +1,12 @@
 import { Header, Method, StatusCode } from '@shopify/network';
-import { Context } from 'koa';
+import { Middleware } from 'koa';
 import getCookieOptions from '../auth/cookie-options';
 import { TEST_COOKIE_NAME, TOP_LEVEL_OAUTH_COOKIE_NAME } from '../index';
-import { NextFunction } from '../types';
 import { Routes } from './types';
 import { redirectToAuth } from './utilities';
 
-export function verifyToken(routes: Routes) {
-	return async function verifyTokenMiddleware(ctx: Context, next: NextFunction) {
+export function verifyToken(routes: Routes): Middleware {
+	return async function verifyTokenMiddleware(ctx, next) {
 		const { session } = ctx;
 
 		if (session && session.accessToken) {

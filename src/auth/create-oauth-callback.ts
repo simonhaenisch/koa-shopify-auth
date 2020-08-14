@@ -1,11 +1,11 @@
-import { Context } from 'koa';
+import { Middleware } from 'koa';
 import querystring from 'querystring';
 import { AuthConfig } from '../types';
 import Error from './errors';
 import validateHmac from './validate-hmac';
 
-export default function createOAuthCallback(config: AuthConfig) {
-	return async function oAuthCallback(ctx: Context) {
+export default function createOAuthCallback(config: AuthConfig): Middleware {
+	return async function oAuthCallback(ctx) {
 		const { query, cookies } = ctx;
 		const { code, hmac, shop, state: nonce } = query;
 		const { apiKey, secret, afterAuth } = config;

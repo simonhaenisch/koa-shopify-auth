@@ -1,5 +1,5 @@
-import { Context } from 'koa';
-import { AccessMode, NextFunction, OAuthStartOptions } from '../types';
+import { Context, Middleware } from 'koa';
+import { AccessMode, OAuthStartOptions } from '../types';
 import { joinPathSegments } from '../utils';
 import createEnableCookies from './create-enable-cookies';
 import createOAuthCallback from './create-oauth-callback';
@@ -26,7 +26,7 @@ function shouldPerformInlineOAuth({ cookies }: Context) {
 	return Boolean(cookies.get(TOP_LEVEL_OAUTH_COOKIE_NAME));
 }
 
-export default function createShopifyAuth(options: OAuthStartOptions) {
+export default function createShopifyAuth(options: OAuthStartOptions): Middleware {
 	const config = {
 		scopes: [],
 		prefix: '',
@@ -49,31 +49,31 @@ export default function createShopifyAuth(options: OAuthStartOptions) {
 	const enableCookies = createEnableCookies(config);
 	const requestStorageAccess = createRequestStorageAccess(config);
 
-	return async function shopifyAuth(ctx: Context, next: NextFunction) {
+	return async function shopifyAuth(ctx, next) {
 		ctx.cookies.secure = true;
 
 		if (ctx.path === oAuthStartPath && !hasCookieAccess(ctx) && !grantedStorageAccess(ctx)) {
-			requestStorageAccess(ctx);
+			requestStorageAccess(ctx, next);
 			return;
 		}
 
 		if (ctx.path === inlineOAuthPath || (ctx.path === oAuthStartPath && shouldPerformInlineOAuth(ctx))) {
-			oAuthStart(ctx);
+			oAuthStart(ctx, next);
 			return;
 		}
 
 		if (ctx.path === oAuthStartPath) {
-			topLevelOAuthRedirect(ctx);
+			topLevelOAuthRedirect(ctx, next);
 			return;
 		}
 
 		if (ctx.path === oAuthCallbackPath) {
-			await oAuthCallback(ctx);
+			await oAuthCallback(ctx, next);
 			return;
 		}
 
 		if (ctx.path === enableCookiesPath) {
-			enableCookies(ctx);
+			enableCookies(ctx, next);
 			return;
 		}
 

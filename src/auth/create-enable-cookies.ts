@@ -1,4 +1,4 @@
-import { Context } from 'koa';
+import { Middleware } from 'koa';
 import { OAuthStartOptions } from '../types';
 import itpHelper from './client/itp-helper';
 import css from './client/polaris-css';
@@ -11,8 +11,8 @@ const FOOTER = `Cookies let the app authenticate you by temporarily storing your
 information. They expire after 30 days.`;
 const ACTION = 'Enable cookies';
 
-export default function createEnableCookies(config: OAuthStartOptions) {
-	return function enableCookies(ctx: Context) {
+export default function createEnableCookies(config: OAuthStartOptions): Middleware {
+	return function enableCookies(ctx) {
 		const { query } = ctx;
 		const { shop: unsafeShop } = query;
 

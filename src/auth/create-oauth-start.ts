@@ -1,12 +1,12 @@
-import { Context } from 'koa';
+import { Middleware } from 'koa';
 import { OAuthStartOptions } from '../types';
 import getCookieOptions from './cookie-options';
 import Error from './errors';
 import { TOP_LEVEL_OAUTH_COOKIE_NAME } from './index';
 import oAuthQueryString from './oauth-query-string';
 
-export default function createOAuthStart(options: OAuthStartOptions, callbackPath: string) {
-	return function oAuthStart(ctx: Context) {
+export default function createOAuthStart(options: OAuthStartOptions, callbackPath: string): Middleware {
+	return function oAuthStart(ctx) {
 		const { myShopifyDomain } = options;
 		const { query } = ctx;
 		const { shop: unsafeShop } = query;
