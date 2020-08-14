@@ -1,3 +1,5 @@
+import { GRANTED_STORAGE_ACCESS_COOKIE_NAME } from '..';
+
 // Copied from https://github.com/Shopify/shopify_app
 const storageAccessHelper = `(function() {
       var ACCESS_GRANTED_STATUS = 'storage_access_granted';
@@ -64,11 +66,12 @@ const storageAccessHelper = `(function() {
 
       StorageAccessHelper.prototype.grantedStorageAccess = function() {
         try {
-          sessionStorage.setItem('shopify.granted_storage_access', true);
-          this.setCookie('shopify.granted_storage_access=true');
+          sessionStorage.setItem('${GRANTED_STORAGE_ACCESS_COOKIE_NAME}', true);
+          this.setCookie('${GRANTED_STORAGE_ACCESS_COOKIE_NAME}=true');
           if (!document.cookie) {
             throw new Error('Cannot set third-party cookie.');
           }
+          // this.redirectToAppTLD(ACCESS_GRANTED_STATUS);
           this.redirectToAppTargetUrl();
         } catch (error) {
           console.warn('Third party cookies may be blocked.', error);
@@ -89,7 +92,7 @@ const storageAccessHelper = `(function() {
       }
 
       StorageAccessHelper.prototype.handleHasStorageAccess = function() {
-        if (sessionStorage.getItem('shopify.granted_storage_access')) {
+        if (sessionStorage.getItem('${GRANTED_STORAGE_ACCESS_COOKIE_NAME}')) {
           // If app was classified by ITP and used Storage Access API to acquire access
           this.redirectToAppTargetUrl();
         } else {
