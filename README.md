@@ -20,6 +20,8 @@ if (!process.env.PROD_BUILD) {
 * `verifyToken` properly redirects to auth if the token has expired ([43b51a6](https://github.com/simonhaenisch/koa-shopify-auth/commit/43b51a6f1497b06aa5859e858e3574db3d0ccb90))
 * prevent xss attacks through `shop` query param everywhere ([bb860f0](https://github.com/simonhaenisch/koa-shopify-auth/commit/bb860f0553fdd8db848683def31cfbe3018a6395))
 * `verifyToken` also sets same-site cookie options for Chrome ([5079bee](https://github.com/simonhaenisch/koa-shopify-auth/commit/5079beeaa92e5cf63764ef0c13e62c11f452014d))
+* stop the "enable cookies" page from flashing when it auto-redirects ([39af5ba](https://github.com/simonhaenisch/koa-shopify-auth/commit/39af5bad240a46079c554af9c199d7d186404535))
+* stop `StorageAccessHelper` from prematurely redirecting to the `appTargetUrl` instead of authentication ([b311479](https://github.com/simonhaenisch/koa-shopify-auth/commit/b311479270ebd2723a01991d8b5df512a02096a8))
 
 **Features:**
 
