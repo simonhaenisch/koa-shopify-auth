@@ -2,7 +2,7 @@ import { OAuthStartOptions } from '../../types';
 import { joinPathSegments } from '../../utils';
 
 // Copied from https://github.com/Shopify/shopify_app
-const requestStorageAccess = (shop: string, { prefix = '', appTargetUrl = '' }: OAuthStartOptions) => {
+const requestStorageAccess = (shop: string, { prefix = '', appTargetUrl = '/' }: OAuthStartOptions) => {
 	return `(function() {
       function redirect() {
         var targetInfo = {

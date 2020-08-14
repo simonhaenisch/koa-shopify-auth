@@ -30,7 +30,7 @@ export default function createShopifyAuth(options: OAuthStartOptions): Middlewar
 	const config = {
 		scopes: [],
 		prefix: '',
-		appTargetUrl: '',
+		appTargetUrl: '/',
 		myShopifyDomain: DEFAULT_MYSHOPIFY_DOMAIN,
 		accessMode: DEFAULT_ACCESS_MODE,
 		...options,

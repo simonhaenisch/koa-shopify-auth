@@ -32,6 +32,7 @@ test('joinPathSegments', (t) => {
 	t.is(joinPathSegments('/prefix/', '/auth/'), '/prefix/auth');
 
 	t.is(joinPathSegments('', '?shop=foo'), '/?shop=foo');
+	t.is(joinPathSegments('/', '?shop=foo'), '/?shop=foo');
 	t.is(joinPathSegments('prefix', '?shop=foo'), '/prefix?shop=foo');
 
 	t.is(joinPathSegments('', 'auth', 'inline?shop=foo'), '/auth/inline?shop=foo');
