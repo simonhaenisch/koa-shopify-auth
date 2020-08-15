@@ -4,15 +4,7 @@ Middleware to authenticate a [Koa](http://koajs.com/) application with [Shopify]
 
 Same as `@shopify/koa-shopify-auth` but with some fixes and improvements so that it kind of works. Sadly it seems the Shopify team doesn't care much about community contributions, often not even leaving a comment (see [#791](https://github.com/Shopify/quilt/issues/791), [#1099](https://github.com/Shopify/quilt/1099), [#1148](https://github.com/Shopify/quilt/1148), [#1359](https://github.com/Shopify/quilt/1359) or [#1407](https://github.com/Shopify/quilt/1407)). They also don't seem to follow semver so well (see [#1498 (comment)](https://github.com/Shopify/quilt/pull/1498#issuecomment-664974203)).
 
-_Hint:_ the `verifyToken` cookie fix requires a secure context for the cookies to work (see <https://github.com/pillarjs/cookies#secure-cookies>), which isn't usually the case during development, unless you set `koa.proxy = true` and use a tool like `cloudflared` or `ngrok` to proxy a secure connection to `http://localhost`. For our app we use
-
-```js
-// this `if` block makes it tree-shakeable
-if (!process.env.PROD_BUILD) {
-  // enable proxy mode in dev builds so that secure cookies work
-  koa.proxy = true;
-}
-```
+_Important:_ the `verifyToken` cookie fix requires a secure context for the cookies to work (see <https://github.com/pillarjs/cookies#secure-cookies>), which means that you'll have to set `koa.proxy = true` (see koa docs); that will make koa trust proxy-related headers, which is needed so that koa makes the context secure for requests to relative paths like `/api/auth`. For development you'll have to use a tool like `cloudflared` or `ngrok` to proxy a secure connection to `http://localhost`.
 
 **Fixes:**
 
