@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { Context } from 'koa';
 import querystring from 'querystring';
-import safeCompare from 'safe-compare';
+import { safeCompare } from './safe-compare';
 
 export default function validateHmac(hmac: string, secret: string, query: Context['query']) {
 	const { hmac: _hmac, signature: _signature, ...map } = query;
